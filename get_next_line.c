@@ -6,7 +6,7 @@
 /*   By: mnkebeny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 09:29:07 by mnkebeny          #+#    #+#             */
-/*   Updated: 2018/09/07 16:49:15 by mnkebeny         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:55:53 by mnkebeny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,32 @@ int		get_next_line(const int fd, char **line)
 	if (ft_strlen(*line) > 0 || i > 0)
 		return (1);
 	return (0);
+}
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(int argc, char* argv[])
+{
+
+	int		fd;
+	char	*line;
+
+	if (argc == 1)
+	{
+		fd = 0;
+		ft_putendl("nothing was rea...");
+		return(0);
+	}
+	else if (argc == 2)
+		fd = open(argv[1], O_RDONLY);
+	else
+		return (2);
+	while (get_next_line(fd, &line) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
+	if (argc == 2)
+		close(fd);
 }
